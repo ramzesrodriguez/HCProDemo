@@ -7,7 +7,8 @@
 
     <fragment
         android:id="@+id/usersFragment"
-        android:name="com.externalpods.hcprodemo.presentation.users.fragment.UsersFragment"
-        android:label="fragment_users"
-        tools:layout="@layout/fragment_users" />
+        android:name="com.externalpods.hcprodemo.presentation.users.list.fragment.UsersFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_users_list" />
+
 </navigation>
