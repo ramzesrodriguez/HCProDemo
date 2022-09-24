@@ -1,0 +1,53 @@
+android {
+  compileSdkVersion rootProject.ext.compileSdk
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  defaultConfig {
+    applicationId rootProject.ext.appId
+    minSdkVersion rootProject.ext.minSdk
+    targetSdkVersion rootProject.ext.targetSdk
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunnerArguments clearPackageData: 'true'
+  }
+
+  buildTypes {
+    debug {
+      debuggable true
+      signingConfig signingConfigs.debug
+      applicationIdSuffix ".dev"
+      versionNameSuffix applicationIdSuffix
+    }
+    release {
+      signingConfig signingConfigs.debug
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    coreLibraryDesugaringEnabled true
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
+
+  buildFeatures {
+    viewBinding true
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+      all {
+        jvmArgs '-noverify'
+      }
+    }
+    execution 'ANDROIDX_TEST_ORCHESTRATOR'
+  }
+}

@@ -1,0 +1,19 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+apply from: '../app_android.gradle'
+apply from: '../app_dependencies.gradle'
+
+android {
+    defaultConfig {
+        buildConfigField "String", "BASE_API_ENDPOINT", "\"https://jsonplaceholder.typicode.com/\""
+    }
+}
+
+dependencies {
+
+}
