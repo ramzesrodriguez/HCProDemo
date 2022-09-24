@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("com.externalpods.hcprodemo.presentation", appContext.packageName)
+    assertEquals("com.externalpods.hcprodemo.dev", appContext.packageName)
   }
 }
