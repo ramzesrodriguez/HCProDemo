@@ -187,3 +187,4 @@ atlassian-ide-plugin.xml
 .idea/mongoSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio
+/.idea/androidTestResultsUserPreferences.xml
