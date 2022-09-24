@@ -1,0 +1,36 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    // Add Dependencies
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    // Annotation
+    implementation "androidx.annotation:annotation:$androidAnnotation"
+
+    // Test
+    testImplementation "junit:junit:$junitVersion"
+    // testImplementation for pure JVM unit tests
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+    // Run Blocking Test
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    // Truth
+    testImplementation "com.google.truth:truth:$truthVersion"
+    // For small test - large test annotations
+    testImplementation "androidx.test:runner:$testRunnerVersion"
+    // Mock objects
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    // For Flow test
+    testImplementation "app.cash.turbine:turbine:$turbineVersion"
+}

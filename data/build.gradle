@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'realm-android'
+}
+
+apply from: '../library_android.gradle'
+
+dependencies {
+    implementation project(':domain')
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Core
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.core:core-ktx:$ktx"
+
+    // Add Dependencies
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+    //GSON
+    implementation "com.google.code.gson:gson:$gson"
+
+    // Preferences Data Store
+    implementation "androidx.datastore:datastore-preferences-core:$preferencesVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Test
+    testImplementation "junit:junit:$junitVersion"
+    // testImplementation for pure JVM unit tests
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines"
+    // Run Blocking Test
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    // Truth
+    testImplementation "com.google.truth:truth:$truthVersion"
+    // For small test - large test annotations
+    testImplementation "androidx.test:runner:$testRunnerVersion"
+    // Mock objects
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    // For Flow test
+    testImplementation "app.cash.turbine:turbine:$turbineVersion"
+
+    // Instrumented Unit Tests
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines") {
+        // conflicts with mockito due to direct inclusion of byte buddy
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+    // Run Blocking Test
+    androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    // Truth
+    androidTestImplementation "com.google.truth:truth:$truthVersion"
+    // For small test - large test annotations
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    // Mock objects
+    androidTestImplementation "io.mockk:mockk-android:$mockkAndroidVersion"
+}
