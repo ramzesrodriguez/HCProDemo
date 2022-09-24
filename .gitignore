@@ -188,3 +188,4 @@ atlassian-ide-plugin.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio
 /.idea/androidTestResultsUserPreferences.xml
+/.idea/.gitignore
