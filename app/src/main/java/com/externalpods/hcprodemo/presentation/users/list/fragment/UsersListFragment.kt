@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.externalpods.hcprodemo.presentation.databinding.FragmentUsersListBinding
-import com.externalpods.hcprodemo.presentation.users.list.UsersViewModel
+import com.externalpods.hcprodemo.presentation.users.list.viewmodel.UsersViewModel
 import com.externalpods.hcprodemo.presentation.users.list.adapter.UsersListAdapter
 import com.externalpods.hcprodemo.presentation.users.list.states.UsersContract
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,7 @@ class UsersFragment : Fragment() {
         initAdapter()
         loadUserList()
         initObservers()
+        observerErrors()
     }
 
     private fun initAdapter() {
@@ -69,6 +71,20 @@ class UsersFragment : Fragment() {
 
                         }
                         else -> {}
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observerErrors() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                usersViewModel.effect.collect { error ->
+                    if (error is UsersContract.UserEffect.GetUsersError) {
+                        Toast.makeText(
+                            requireContext(), error.error.message, Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.externalpods.hcprodemo.presentation.users.list
+package com.externalpods.hcprodemo.presentation.users.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -39,7 +39,7 @@ class UsersViewModel @Inject constructor(
   }
 
   private fun getStates(): List<UiState> {
-    return listOf(UsersContract.UserState.GetUsersLoading)
+    return listOf(UsersContract.UserState.GetUsersIdle)
   }
 
   private fun subscribeToEvents() {
@@ -71,7 +71,7 @@ class UsersViewModel @Inject constructor(
             setState(UsersContract.UserState.GetUsersSuccess(data))
           }
           is Resource.Error -> {
-            setEffect { UsersContract.UserEffect.GetUsersError }
+            setEffect { UsersContract.UserEffect.GetUsersError(resource.exception) }
           }
           is Resource.Loading -> {
             setState(UsersContract.UserState.GetUsersLoading)

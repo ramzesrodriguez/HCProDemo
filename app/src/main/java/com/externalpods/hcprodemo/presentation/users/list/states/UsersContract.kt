@@ -17,6 +17,6 @@ sealed class UsersContract {
   }
 
   sealed class UserEffect: UiEffect {
-    object GetUsersError: UserEffect()
+    data class GetUsersError(val error: Throwable): UserEffect()
   }
 }
