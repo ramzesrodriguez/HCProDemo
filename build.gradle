@@ -3,6 +3,7 @@ apply from: 'versions.gradle'
 
 buildscript {
     ext.kotlin_version = "1.7.10"
+    ext.hilt_version = "2.42"
     ext.nav_version = '2.4.1'
     ext.realm_version = "10.8.0"
 
@@ -16,7 +17,7 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "io.realm:realm-gradle-plugin:$realm_version"
     }

@@ -32,7 +32,6 @@ ext {
 
   glideVersion = "4.12.0"
   viewPagerVersion = "1.0.0"
-  koin_version = "3.2.0"
   preferencesVersion = "1.0.0"
   realm_versionrealm_version = "10.8.0"
   androidAnnotation = "1.2.0"
@@ -55,4 +54,7 @@ ext {
 
   // Desugaring
   desugaring_lib = "1.1.5"
+
+  // Hilt
+  hilt_version = "2.42"
 }

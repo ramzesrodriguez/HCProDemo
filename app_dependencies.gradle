@@ -23,10 +23,6 @@ dependencies {
   implementation "androidx.navigation:navigation-fragment-ktx:$navComponentVersion"
   implementation "androidx.navigation:navigation-ui-ktx:$navComponentVersion"
 
-  // Koin
-  implementation "io.insert-koin:koin-core:$koin_version"
-  implementation "io.insert-koin:koin-android:$koin_version"
-
   // Service
   implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
   implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
@@ -42,6 +38,10 @@ dependencies {
 
   // Preferences data store
   implementation "androidx.datastore:datastore-preferences:$preferencesVersion"
+
+  // Hilt
+  implementation "com.google.dagger:hilt-android:$hilt_version"
+  kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
   // Unit Tests
   testImplementation "junit:junit:$junitVersion"
