@@ -9,6 +9,7 @@ import com.externalpods.hcprodemo.domain.utils.Resource
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
@@ -51,6 +52,8 @@ class GetAllUsersUseCaseTest {
 
       cancelAndIgnoreRemainingEvents()
     }
+
+    coVerify { usersRepository.getAllUsers() }
   }
 
   @Test
@@ -66,5 +69,7 @@ class GetAllUsersUseCaseTest {
 
       cancelAndIgnoreRemainingEvents()
     }
+
+    coVerify { usersRepository.getAllUsers() }
   }
 }
