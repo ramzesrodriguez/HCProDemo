@@ -57,4 +57,7 @@ ext {
 
   // Hilt
   hilt_version = "2.42"
+
+  // Text Drawable
+  textdrawableVersion = "1.0.0"
 }

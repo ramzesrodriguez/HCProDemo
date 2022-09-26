@@ -43,6 +43,9 @@ dependencies {
   implementation "com.google.dagger:hilt-android:$hilt_version"
   kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+  // Material Text color
+  implementation "com.github.adwardstark:materialtextdrawable-for-android:$textdrawableVersion"
+
   // Unit Tests
   testImplementation "junit:junit:$junitVersion"
   // testImplementation for pure JVM unit tests
