@@ -53,6 +53,11 @@ class UsersFragment : Fragment() {
     rv.adapter = adapter
     rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     rv.itemAnimator = DefaultItemAnimator()
+    adapter.listener = {
+      Toast.makeText(
+        requireContext(), it.id.toString(), Toast.LENGTH_SHORT
+      ).show()
+    }
   }
 
   private fun loadUserList() {
