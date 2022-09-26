@@ -14,10 +14,10 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @InstallIn(ViewModelComponent::class)
 abstract class RepositoryModule {
 
-    @Binds
-    abstract fun provideUserApiSource(userRemoteDataSource: UserRemoteDataSource): UserDataSource
+  @Binds
+  abstract fun provideUserApiSource(userRemoteDataSource: UserRemoteDataSource): UserDataSource
 
-    @Binds
-    @ViewModelScoped
-    abstract fun newsRepository(dataRepository: UserDataRepository): UsersRepository
+  @Binds
+  @ViewModelScoped
+  abstract fun newsRepository(dataRepository: UserDataRepository): UsersRepository
 }

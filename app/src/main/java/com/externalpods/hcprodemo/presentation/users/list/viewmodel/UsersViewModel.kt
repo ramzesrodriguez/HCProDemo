@@ -60,11 +60,9 @@ class UsersViewModel @Inject constructor(
 
   private fun getAllUsers() {
     viewModelScope.launch {
-      getAllUsersUseCase.execute(null)
-        .onStart {
-          setState(UsersContract.UserState.GetUsersLoading)
-        }
-        .collect {
+      getAllUsersUseCase.execute(null).onStart {
+        setState(UsersContract.UserState.GetUsersLoading)
+      }.collect {
         when (val resource = it) {
           is Resource.Success -> {
             val data = userMapper.mapCollection(resource.data)
@@ -106,10 +104,9 @@ class UsersViewModel @Inject constructor(
 
   fun getStatesList() = statesFlows.toList()
 
-  inline fun <reified S: UiState> getStateFlow(): StateFlow<S>? {
+  inline fun <reified S : UiState> getStateFlow(): StateFlow<S>? {
     return getStatesList().firstOrNull { it.value is S }?.let {
-      @Suppress("UNCHECKED_CAST")
-      it as StateFlow<S>
-    } ?:run { null }
+      @Suppress("UNCHECKED_CAST") it as StateFlow<S>
+    } ?: run { null }
   }
 }

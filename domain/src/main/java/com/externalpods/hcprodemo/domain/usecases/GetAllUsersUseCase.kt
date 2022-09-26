@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetAllUsersUseCase @Inject constructor(
   private val repository: UsersRepository,
   @IoDispatcher coroutineDispatcher: CoroutineDispatcher,
-): FlowUseCase<Unit, List<UserDto>>(coroutineDispatcher) {
+) : FlowUseCase<Unit, List<UserDto>>(coroutineDispatcher) {
 
   override fun buildRequest(params: Unit?): Flow<Resource<List<UserDto>>> {
     return repository.getAllUsers()

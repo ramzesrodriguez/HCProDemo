@@ -11,7 +11,7 @@ import com.externalpods.hcprodemo.domain.dtos.UserDto
 import com.externalpods.hcprodemo.domain.utils.Mapper
 import javax.inject.Inject
 
-class UserResponseMapper @Inject constructor(): Mapper<UserEntity, UserDto> {
+class UserResponseMapper @Inject constructor() : Mapper<UserEntity, UserDto> {
   /**
    * Transforms the input value in the output value specified
    *

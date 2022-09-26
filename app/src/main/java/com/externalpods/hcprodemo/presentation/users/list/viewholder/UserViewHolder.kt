@@ -5,15 +5,15 @@ import com.externalpods.hcprodemo.presentation.databinding.UserItemViewBinding
 import com.externalpods.hcprodemo.presentation.users.list.models.UserModel
 
 class UserViewHolder(
-    private val view: UserItemViewBinding
+  private val view: UserItemViewBinding
 ) : RecyclerView.ViewHolder(view.root) {
-    fun bind(item: UserModel, listener: (UserModel) -> Unit) {
-        view.textViewName.text = item.name
-        view.textViewAddress.text = item.address?.city
-        view.textViewEmail.text = item.email?.lowercase()
-        view.textViewCompany.text = item.company?.name
-        view.root.setOnClickListener {
-            listener(item)
-        }
+  fun bind(item: UserModel, listener: (UserModel) -> Unit) {
+    view.textViewName.text = item.name
+    view.textViewAddress.text = item.address?.city
+    view.textViewEmail.text = item.email?.lowercase()
+    view.textViewCompany.text = item.company?.name
+    view.root.setOnClickListener {
+      listener(item)
     }
+  }
 }

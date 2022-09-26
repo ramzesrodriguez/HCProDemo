@@ -22,77 +22,77 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class UsersFragment : Fragment() {
 
-    private var _binding: FragmentUsersListBinding? = null
-    private lateinit var adapter: UsersListAdapter
+  private var _binding: FragmentUsersListBinding? = null
+  private lateinit var adapter: UsersListAdapter
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+  // This property is only valid between onCreateView and
+  // onDestroyView.
+  private val binding get() = _binding!!
 
-    private val usersViewModel: UsersViewModel by viewModels()
+  private val usersViewModel: UsersViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUsersListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    _binding = FragmentUsersListBinding.inflate(inflater, container, false)
+    return binding.root
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initAdapter()
-        loadUserList()
-        initObservers()
-        observerErrors()
-    }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initAdapter()
+    loadUserList()
+    initObservers()
+    observerErrors()
+  }
 
-    private fun initAdapter() {
-        adapter = UsersListAdapter()
-        val rv = binding.usersRecyclerView
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        rv.itemAnimator = DefaultItemAnimator()
-    }
+  private fun initAdapter() {
+    adapter = UsersListAdapter()
+    val rv = binding.usersRecyclerView
+    rv.adapter = adapter
+    rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+    rv.itemAnimator = DefaultItemAnimator()
+  }
 
-    private fun loadUserList() {
-        usersViewModel.setEvent(UsersContract.UserEvent.GetAllUsers)
-    }
+  private fun loadUserList() {
+    usersViewModel.setEvent(UsersContract.UserEvent.GetAllUsers)
+  }
 
-    private fun initObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                usersViewModel.getStateFlow<UsersContract.UserState>()?.collect {
-                    when (val state = it) {
-                        is UsersContract.UserState.GetUsersSuccess -> {
-                            adapter.submitList(state.users)
-                        }
-                        is UsersContract.UserState.GetUsersLoading -> {
-
-                        }
-                        else -> {}
-                    }
-                }
+  private fun initObservers() {
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        usersViewModel.getStateFlow<UsersContract.UserState>()?.collect {
+          when (val state = it) {
+            is UsersContract.UserState.GetUsersSuccess -> {
+              adapter.submitList(state.users)
             }
-        }
-    }
+            is UsersContract.UserState.GetUsersLoading -> {
 
-    private fun observerErrors() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                usersViewModel.effect.collect { error ->
-                    if (error is UsersContract.UserEffect.GetUsersError) {
-                        Toast.makeText(
-                            requireContext(), error.error.message, Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
             }
+            else -> {}
+          }
         }
+      }
     }
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+  private fun observerErrors() {
+    viewLifecycleOwner.lifecycleScope.launch {
+      viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        usersViewModel.effect.collect { error ->
+          if (error is UsersContract.UserEffect.GetUsersError) {
+            Toast.makeText(
+              requireContext(), error.error.message, Toast.LENGTH_SHORT
+            ).show()
+          }
+        }
+      }
     }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }
