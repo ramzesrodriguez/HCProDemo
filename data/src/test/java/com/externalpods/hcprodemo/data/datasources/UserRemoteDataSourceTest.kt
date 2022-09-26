@@ -12,6 +12,8 @@ import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType
+import okhttp3.Protocol
+import okhttp3.Request
 import okhttp3.ResponseBody
 import org.junit.Before
 import org.junit.Test
@@ -45,17 +47,36 @@ class UserRemoteDataSourceTest {
 
   @Test
   fun `validate get all users error`() = runTest {
-    coEvery { userApiServices.getAllUsers() } returns Response.error(
-      401,
-      ResponseBody.create(MediaType.parse("application/json"), "ERROR")
-    )
+    val errorMessage = "ERROR"
+    val response = createHttpErrorResponse(errorMessage)
+    coEvery { userApiServices.getAllUsers() } returns response
 
     val data = dataSource.getAllUsers()
     Truth.assertThat(data).isInstanceOf(ApiResponse.Error::class.java)
 
     val error = (data as ApiResponse.Error).errorMessage
     Truth.assertThat(error).isNotEmpty()
+    Truth.assertThat(error).isEqualTo(errorMessage)
 
     coVerify { userApiServices.getAllUsers() }
+  }
+
+  private fun createHttpErrorResponse(message: String): Response<UsersResponse> {
+    val responseBody = ResponseBody.create(MediaType.parse("application/json"), message)
+    val requestBuilder = Request.Builder()
+      .get()
+      .url("http://localhost")
+      .build()
+    val response = okhttp3.Response.Builder()
+      .body(responseBody)
+      .protocol(Protocol.HTTP_1_1)
+      .code(400)
+      .message(message)
+      .request(requestBuilder)
+      .build()
+    return Response.error(
+      responseBody,
+      response
+    )
   }
 }
