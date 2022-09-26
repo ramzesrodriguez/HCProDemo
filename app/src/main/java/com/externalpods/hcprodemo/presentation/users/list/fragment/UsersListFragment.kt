@@ -54,9 +54,7 @@ class UsersFragment : Fragment() {
     rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     rv.itemAnimator = DefaultItemAnimator()
     adapter.listener = {
-      Toast.makeText(
-        requireContext(), it.id.toString(), Toast.LENGTH_SHORT
-      ).show()
+      // TODO - handle click to do action
     }
   }
 
