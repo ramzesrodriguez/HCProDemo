@@ -10,8 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.externalpods.hcprodemo.presentation.R
 import com.externalpods.hcprodemo.presentation.databinding.FragmentUsersListBinding
 import com.externalpods.hcprodemo.presentation.users.list.viewmodel.UsersViewModel
 import com.externalpods.hcprodemo.presentation.users.list.adapter.UsersListAdapter
@@ -54,9 +57,9 @@ class UsersFragment : Fragment() {
     rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     rv.itemAnimator = DefaultItemAnimator()
     adapter.listener = {
-      Toast.makeText(
-        requireContext(), it.id.toString(), Toast.LENGTH_SHORT
-      ).show()
+      findNavController().navigate(R.id.action_usersFragment_to_userDetailFragment, Bundle().apply {
+        putParcelable("user_model", it)
+      })
     }
   }
 

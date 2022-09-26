@@ -9,6 +9,21 @@
         android:id="@+id/usersFragment"
         android:name="com.externalpods.hcprodemo.presentation.users.list.fragment.UsersFragment"
         android:label="Users"
-        tools:layout="@layout/fragment_users_list" />
+        tools:layout="@layout/fragment_users_list" >
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.externalpods.hcprodemo.presentation.users.detail.fragment.UserDetailFragment"
+        android:label="UserDetailFragment" >
+
+        <argument
+            android:name="user_model"
+            app:argType="com.externalpods.hcprodemo.presentation.users.list.models.UserModel" />
+
+    </fragment>
 
 </navigation>
