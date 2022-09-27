@@ -7,10 +7,6 @@
     tools:context=".users.list.fragment.UsersFragment"
     android:background="@color/light_background">
 
-    <include
-        android:id="@+id/search_box_container"
-        layout="@layout/search_header" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
         android:layout_width="match_parent"
@@ -18,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_box_container"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/user_item_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,19 @@
 package com.externalpods.hcprodemo.presentation.users.list.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.externalpods.hcprodemo.presentation.R
 import com.externalpods.hcprodemo.presentation.databinding.FragmentUsersListBinding
 import com.externalpods.hcprodemo.presentation.users.list.viewmodel.UsersViewModel
 import com.externalpods.hcprodemo.presentation.users.list.adapter.UsersListAdapter
@@ -25,6 +26,7 @@ class UsersFragment : Fragment() {
 
   private var _binding: FragmentUsersListBinding? = null
   private lateinit var adapter: UsersListAdapter
+  private lateinit var searchView: SearchView
 
   // This property is only valid between onCreateView and
   // onDestroyView.
@@ -37,6 +39,7 @@ class UsersFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View {
     _binding = FragmentUsersListBinding.inflate(inflater, container, false)
+    setHasOptionsMenu(true)
     return binding.root
   }
 
@@ -45,22 +48,8 @@ class UsersFragment : Fragment() {
     initAdapter()
     loadUserList()
     initObservers()
+    initCallbackListener()
     observerErrors()
-    initSearchBar()
-  }
-
-  private fun initSearchBar() {
-    binding.searchBoxContainer.searchEditText.doOnTextChanged { text, _, _, _ ->
-      val query = text.toString().lowercase()
-      binding.searchBoxContainer.clearSearchQuery.visibility = if (query.isNotEmpty())
-        View.VISIBLE
-      else View.GONE
-
-      adapter.filter.filter(query)
-    }
-    binding.searchBoxContainer.clearSearchQuery.setOnClickListener {
-      binding.searchBoxContainer.searchEditText.text?.clear()
-    }
   }
 
   private fun initAdapter() {
@@ -96,6 +85,22 @@ class UsersFragment : Fragment() {
     }
   }
 
+  private fun initCallbackListener() {
+    val callback = object : OnBackPressedCallback(true) {
+      override fun handleOnBackPressed() {
+        if (!searchView.isIconified) {
+          searchView.onActionViewCollapsed()
+        } else {
+          if (findNavController().previousBackStackEntry == null)
+            requireActivity().finish()
+          else
+            findNavController().navigateUp()
+        }
+      }
+    }
+    requireActivity().onBackPressedDispatcher.addCallback(callback)
+  }
+
   private fun observerErrors() {
     viewLifecycleOwner.lifecycleScope.launch {
       viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -107,6 +112,27 @@ class UsersFragment : Fragment() {
           }
         }
       }
+    }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+    menuInflater.inflate(R.menu.search_menu, menu)
+    val searchItem = menu.findItem(R.id.action_search)
+    if (searchItem != null) {
+      searchView = searchItem.actionView as SearchView
+      searchView.maxWidth = Integer.MAX_VALUE
+      searchView.queryHint = getString(R.string.search_names_hint)
+      searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+          adapter.filter.filter(query)
+          return false
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+          adapter.filter.filter(newText)
+          return false
+        }
+      })
     }
   }
 
