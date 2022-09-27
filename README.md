@@ -18,4 +18,3 @@ Uses concepts of the notorious Uncle Bob's architecture called [Clean Architectu
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 - [Retrofit](https://github.com/square/retrofit) - Used for REST api communication.
 - [OkHttp](http://square.github.io/okhttp/) - HTTP client that's efficient by default: HTTP/2 support allows all requests to the same host to share a socket
-- [Moshi](https://github.com/square/moshi) - Used to convert Java Objects into their JSON representation and vice versa.
