@@ -1,5 +1,3 @@
-[![Ramzes Rodriguez LinkedIn](https://media-exp1.licdn.com/dms/image/C4E03AQGy_pxmypx2VA/profile-displayphoto-shrink_800_800/0/1551817528009?e=1669852800&v=beta&t=cEb9NYyYpQR2XPbqBYrTMBVhNvPe0FYwaQp9Zooy6qg)](https://www.linkedin.com/in/ramzes/)
-
 # HCProDemo
 HCProDemo - App consuming a [Users Placeholders API](https://jsonplaceholder.typicode.com/users) to display Users, it has been built with clean architecture principles, Repository Pattern, and MVVM pattern as well as Architecture Components.
 
