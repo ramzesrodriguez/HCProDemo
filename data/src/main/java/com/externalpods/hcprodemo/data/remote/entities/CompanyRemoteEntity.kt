@@ -2,7 +2,7 @@ package com.externalpods.hcprodemo.data.remote.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class CompanyEntity(
+data class CompanyRemoteEntity(
   @SerializedName("bs")
   var bs: String? = null,
   @SerializedName("catchPhrase")

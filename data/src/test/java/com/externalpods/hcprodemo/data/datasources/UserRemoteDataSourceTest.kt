@@ -1,6 +1,7 @@
 package com.externalpods.hcprodemo.data.datasources
 
 import com.externalpods.hcprodemo.data.remote.datasources.UserRemoteDataSource
+import com.externalpods.hcprodemo.data.remote.mappers.UserResponseMapper
 import com.externalpods.hcprodemo.data.remote.responses.UsersResponse
 import com.externalpods.hcprodemo.data.remote.services.UserApiServices
 import com.externalpods.hcprodemo.data.remote.utils.ApiResponse
@@ -27,12 +28,14 @@ class UserRemoteDataSourceTest {
   @MockK
   private lateinit var userApiServices: UserApiServices
 
+  private val userEntityMapper = UserResponseMapper()
+
   private lateinit var dataSource: UserDataSource
 
   @Before
   fun setup() {
     MockKAnnotations.init(this, relaxUnitFun = true)
-    dataSource = UserRemoteDataSource(userApiServices)
+    dataSource = UserRemoteDataSource(userApiServices, userEntityMapper)
   }
 
   @Test

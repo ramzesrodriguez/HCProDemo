@@ -2,11 +2,11 @@ package com.externalpods.hcprodemo.data.remote.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class AddressEntity(
+data class AddressRemoteEntity(
   @SerializedName("city")
   var city: String? = null,
   @SerializedName("geo")
-  var geo: GeoEntity? = null,
+  var geo: GeoRemoteEntity? = null,
   @SerializedName("street")
   var street: String? = null,
   @SerializedName("suite")

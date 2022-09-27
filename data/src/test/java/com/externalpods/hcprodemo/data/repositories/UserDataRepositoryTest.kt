@@ -2,8 +2,8 @@ package com.externalpods.hcprodemo.data.repositories
 
 import app.cash.turbine.test
 import com.externalpods.hcprodemo.data.datasources.UserDataSource
-import com.externalpods.hcprodemo.data.remote.entities.UserEntity
-import com.externalpods.hcprodemo.data.remote.mappers.UserResponseMapper
+import com.externalpods.hcprodemo.data.entities.UserEntity
+import com.externalpods.hcprodemo.data.mappers.UserEntityMapper
 import com.externalpods.hcprodemo.data.remote.utils.ApiResponse
 import com.externalpods.hcprodemo.domain.repositories.UsersRepository
 import com.externalpods.hcprodemo.domain.utils.Resource
@@ -24,7 +24,7 @@ class UserDataRepositoryTest {
 
   @MockK
   private lateinit var remoteDataSource: UserDataSource
-  private val userMapper = UserResponseMapper()
+  private val userMapper = UserEntityMapper()
 
   private lateinit var usersRepository: UsersRepository
 

@@ -1,5 +1,5 @@
 package com.externalpods.hcprodemo.data.remote.responses
 
-import com.externalpods.hcprodemo.data.remote.entities.UserEntity
+import com.externalpods.hcprodemo.data.remote.entities.UserRemoteEntity
 
-class UsersResponse: ArrayList<UserEntity>()
+class UsersResponse: ArrayList<UserRemoteEntity>()

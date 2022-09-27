@@ -1,25 +1,25 @@
 package com.externalpods.hcprodemo.data.remote.mappers
 
-import com.externalpods.hcprodemo.data.remote.entities.AddressEntity
-import com.externalpods.hcprodemo.data.remote.entities.CompanyEntity
-import com.externalpods.hcprodemo.data.remote.entities.GeoEntity
-import com.externalpods.hcprodemo.data.remote.entities.UserEntity
-import com.externalpods.hcprodemo.domain.dtos.AddressDto
-import com.externalpods.hcprodemo.domain.dtos.CompanyDto
-import com.externalpods.hcprodemo.domain.dtos.GeoDto
-import com.externalpods.hcprodemo.domain.dtos.UserDto
+import com.externalpods.hcprodemo.data.entities.AddressEntity
+import com.externalpods.hcprodemo.data.entities.CompanyEntity
+import com.externalpods.hcprodemo.data.entities.GeoEntity
+import com.externalpods.hcprodemo.data.entities.UserEntity
+import com.externalpods.hcprodemo.data.remote.entities.AddressRemoteEntity
+import com.externalpods.hcprodemo.data.remote.entities.CompanyRemoteEntity
+import com.externalpods.hcprodemo.data.remote.entities.GeoRemoteEntity
+import com.externalpods.hcprodemo.data.remote.entities.UserRemoteEntity
 import com.externalpods.hcprodemo.domain.utils.Mapper
 import javax.inject.Inject
 
-class UserResponseMapper @Inject constructor() : Mapper<UserEntity, UserDto> {
+class UserResponseMapper @Inject constructor() : Mapper<UserRemoteEntity, UserEntity> {
   /**
    * Transforms the input value in the output value specified
    *
    * @param value input value type
    * @return output value type if valid; otherwise null
    */
-  override fun map(value: UserEntity): UserDto {
-    return UserDto(
+  override fun map(value: UserRemoteEntity): UserEntity {
+    return UserEntity(
       mapAddress(value.address),
       mapCompany(value.company),
       value.email,
@@ -31,8 +31,8 @@ class UserResponseMapper @Inject constructor() : Mapper<UserEntity, UserDto> {
     )
   }
 
-  private fun mapAddress(address: AddressEntity?): AddressDto? {
-    return AddressDto(
+  private fun mapAddress(address: AddressRemoteEntity?): AddressEntity {
+    return AddressEntity(
       address?.city,
       mapGeo(address?.geo),
       address?.street,
@@ -41,11 +41,11 @@ class UserResponseMapper @Inject constructor() : Mapper<UserEntity, UserDto> {
     )
   }
 
-  private fun mapCompany(company: CompanyEntity?): CompanyDto? {
-    return CompanyDto(company?.bs, company?.catchPhrase, company?.name)
+  private fun mapCompany(company: CompanyRemoteEntity?): CompanyEntity {
+    return CompanyEntity(company?.bs, company?.catchPhrase, company?.name)
   }
 
-  private fun mapGeo(geo: GeoEntity?): GeoDto? {
-    return GeoDto(geo?.lat, geo?.lng)
+  private fun mapGeo(geo: GeoRemoteEntity?): GeoEntity {
+    return GeoEntity(geo?.lat, geo?.lng)
   }
 }

@@ -1,11 +1,11 @@
 package com.externalpods.hcprodemo.data.remote.entities
 import com.google.gson.annotations.SerializedName
 
-data class UserEntity(
+data class UserRemoteEntity(
     @SerializedName("address")
-    var address: AddressEntity? = null,
+    var address: AddressRemoteEntity? = null,
     @SerializedName("company")
-    var company: CompanyEntity? = null,
+    var company: CompanyRemoteEntity? = null,
     @SerializedName("email")
     var email: String? = null,
     @SerializedName("id")
