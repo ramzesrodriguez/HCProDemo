@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -45,6 +46,21 @@ class UsersFragment : Fragment() {
     loadUserList()
     initObservers()
     observerErrors()
+    initSearchBar()
+  }
+
+  private fun initSearchBar() {
+    binding.searchBoxContainer.searchEditText.doOnTextChanged { text, _, _, _ ->
+      val query = text.toString().lowercase()
+      binding.searchBoxContainer.clearSearchQuery.visibility = if (query.isNotEmpty())
+        View.VISIBLE
+      else View.GONE
+
+      adapter.filter.filter(query)
+    }
+    binding.searchBoxContainer.clearSearchQuery.setOnClickListener {
+      binding.searchBoxContainer.searchEditText.text?.clear()
+    }
   }
 
   private fun initAdapter() {
