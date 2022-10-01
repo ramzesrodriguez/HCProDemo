@@ -9,6 +9,25 @@
         android:id="@+id/usersFragment"
         android:name="com.externalpods.hcprodemo.presentation.users.list.fragment.UsersFragment"
         android:label="Users"
-        tools:layout="@layout/fragment_users_list" />
+        tools:layout="@layout/fragment_users_list" >
+        <action
+            android:id="@+id/action_usersFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.externalpods.hcprodemo.presentation.users.details.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details">
+
+        <argument
+            android:name="user_model"
+            app:argType="com.externalpods.hcprodemo.presentation.users.list.models.UserModel"
+            />
+    </fragment>
 </navigation>
