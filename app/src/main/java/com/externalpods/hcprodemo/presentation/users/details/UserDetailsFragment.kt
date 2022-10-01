@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.view.animation.*
 import android.view.animation.Animation.AnimationListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.externalpods.hcprodemo.presentation.R
 import com.externalpods.hcprodemo.presentation.databinding.FragmentUserDetailsBinding
 import com.externalpods.hcprodemo.presentation.users.list.models.UserModel
 
@@ -43,6 +46,9 @@ class UserDetailsFragment : Fragment() {
     binding.userName.text = userModel?.name
     binding.userEmail.text = userModel?.email
     animate()
+    binding.fakeView.setOnClickListener {
+      findNavController().navigate(R.id.action_userDetailsFragment_to_contactUserFragment)
+    }
   }
 
   private fun animate() {

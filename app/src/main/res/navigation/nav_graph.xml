@@ -29,5 +29,20 @@
             android:name="user_model"
             app:argType="com.externalpods.hcprodemo.presentation.users.list.models.UserModel"
             />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_contactUserFragment"
+            app:destination="@id/contactUserFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/contactUserFragment"
+        android:name="com.externalpods.hcprodemo.presentation.ContactUserFragment"
+        android:label="fragment_contact_user"
+        tools:layout="@layout/fragment_contact_user" />
+
+
 </navigation>
