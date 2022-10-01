@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_graph"
+    app:startDestination="@id/usersMapFragment">
+
+    <fragment
+        android:id="@+id/usersMapFragment"
+        android:name="com.externalpods.hcprodemo.presentation.UsersMapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_users_map" >
+        <action
+            android:id="@+id/action_usersMapFragment_to_mapDetailsFragment"
+            app:destination="@id/mapDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapDetailsFragment"
+        android:name="com.externalpods.hcprodemo.presentation.MapDetailsFragment"
+        android:label="Map details"
+        tools:layout="@layout/fragment_map_details" />
+
+
+</navigation>

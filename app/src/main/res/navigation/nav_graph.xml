@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.externalpods.hcprodemo.presentation.users.details.UserDetailsFragment"
-        android:label="fragment_user_details"
+        android:label="User details"
         tools:layout="@layout/fragment_user_details">
 
         <argument

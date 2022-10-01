@@ -5,10 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.externalpods.hcprodemo.presentation.R
 import com.externalpods.hcprodemo.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +32,7 @@ class MainActivity : AppCompatActivity() {
       fallbackOnNavigateUpListener = ::onSupportNavigateUp
     )
     binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    NavigationUI.setupWithNavController(binding.navMenu, navController)
   }
 
   override fun onSupportNavigateUp(): Boolean {
